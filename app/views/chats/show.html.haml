@@ -1,6 +1,8 @@
-.messages
+Messages:
+#messages
 
+%hr
 .new-message
-  = simple_form_for @message do |f|
+  = simple_form_for @message, remote: true do |f|
     = f.input :content, as: :string, label: "#{session['user']['name']}: "
     = f.submit 'Send my message'

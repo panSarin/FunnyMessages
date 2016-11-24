@@ -1,4 +1,4 @@
-class ChatsController < ApplicationController
+class ChatsController < AuthenticationController
   def show
     @message = Message.new
   end

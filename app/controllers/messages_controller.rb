@@ -1,25 +1,29 @@
-class MessagesController < ApplicationController
+class MessagesController < AuthenticationController
   def create
     message = Message.new(message_params)
-    message.content_with_dialect = set_dialected_content(message_params)
     message.username = session['user']['name']
-    if message.create
-      # broadcast messages
+    message.dialect = session['user']['dialect']
+    message.content_with_dialect = set_dialected_content(message)
+    if message.save
+      ActionCable.server.broadcast 'messages',
+                                   message: message.content_with_dialect,
+                                   user: message.username
+      head :ok
     end
   end
 
 private
 
-  def set_dialected_content(message_params)
+  def set_dialected_content(message)
     begin
-      content_with_dialect = ConvertByDialect.new(message_params).process
+      converted_content = ConvertByDialect.new(message.content, message.dialect).process
     rescue ConvertByDialect::Process::UnexpectedDialect
-      content_with_dialect = message.content
+      converted_content = message.content #maybe we should render some error/notification ?
     end
-    content_with_dialect
+    converted_content
   end
 
   def message_params
-    params.require(:message).permit(:content, :dialect)
+    params.require(:message).permit(:content)
   end
 end
