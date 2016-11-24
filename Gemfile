@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'haml'
 gem 'simple_form'
+gem 'httparty'
 
 
 group :development, :test do
