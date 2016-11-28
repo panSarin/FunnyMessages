@@ -15,12 +15,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    session = UserSession.find
-    user.destroy
-    session.destroy
-    ActionCable.server.broadcast 'users', name: user.name, deleted: 'true'
-  end
+  # TODO - add sign out feature, and handle removing old users / heartbeating frontend that will let us know
+  # who logged out
 
 private
 
