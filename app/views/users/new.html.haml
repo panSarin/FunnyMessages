@@ -1,6 +1,8 @@
-= simple_form_for @user_form, as: :user, url: users_path do |f|
-  .form-inputs
-    = f.input :name
-    = f.input :dialect, as: :select, collection: [['Pirate', 'pirate'], ['Yoda', 'yoda'], ['Valley Girl', 'valley_girl']]
-  .form-actions
-    = f.submit 'Let me chat'
+.container
+  .center-block
+    = simple_form_for @user_form, html: {class: 'form-inline'}, as: :user, url: users_path do |f|
+      .form-inputs
+        = f.input :name
+        = f.input :dialect, as: :select, collection: [['Pirate', 'pirate'], ['Yoda', 'yoda'], ['Valley Girl', 'valley_girl']]
+      .form-actions
+        = f.submit 'Let me chat', class: 'btn btn-primary'

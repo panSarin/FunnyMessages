@@ -7,7 +7,9 @@ class MessagesController < AuthenticationController
     if message.save
       ActionCable.server.broadcast 'messages',
                                    message: message.content_with_dialect,
-                                   user: message.username
+                                   user: message.username,
+                                   created_at: l(message.created_at)
+
       head :ok
     end
   end

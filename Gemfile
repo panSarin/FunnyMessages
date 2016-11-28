@@ -33,6 +33,8 @@ gem 'haml'
 gem 'simple_form'
 gem 'httparty'
 
+gem 'bootstrap-sass'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

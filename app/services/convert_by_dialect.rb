@@ -37,18 +37,17 @@ private
   end
 
   def get_yoda_content
-    # tried api.funtranslations.com  but free only for 25 translations per day ;[
-    # response = HTTParty.get('http://api.funtranslations.com/translate/yoda.json?text='+content)
-    # JSON.parse(response.body)['contents']['translated']
-
     response = HTTParty.get('http://www.degraeve.com/cgi-bin/babel.cgi?d=yoda&url=&w='+content)
-    html_doc = Nokogiri::HTML(response.body)
-    html_doc.css('p').children.text.squish
+    get_degraeve_content(response.body)
   end
 
   def get_valley_girl_content
     response = HTTParty.get('http://www.degraeve.com/cgi-bin/babel.cgi?d=valley&url=&w='+content)
-    html_doc = Nokogiri::HTML(response.body)
+    get_degraeve_content(response.body)
+  end
+
+  def get_degraeve_content(body)
+    html_doc = Nokogiri::HTML(body)
     html_doc.css('p').children.text.squish
   end
 end
