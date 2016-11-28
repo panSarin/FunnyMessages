@@ -1,8 +1,8 @@
 class MessagesController < AuthenticationController
   def create
     message = Message.new(message_params)
-    message.username = session['user']['name']
-    message.dialect = session['user']['dialect']
+    message.username = current_user.name
+    message.dialect = current_user.dialect
     message.content_with_dialect = set_dialected_content(message)
     if message.save
       ActionCable.server.broadcast 'messages',

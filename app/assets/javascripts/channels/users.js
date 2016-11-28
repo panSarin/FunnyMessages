@@ -1,7 +1,10 @@
 App.users = App.cable.subscriptions.create('UsersChannel', {
     received: function(data) {
-        console.debug(data);
-        return $('#users ul').append(this.renderUser(data));
+        if(data.deleted == true) {
+            return $("#users > ul > li:contains('"+data.name+"')").remove();
+        }else {
+            return $('#users ul').append(this.renderUser(data));
+        };
     },
 
     renderUser: function(data) {

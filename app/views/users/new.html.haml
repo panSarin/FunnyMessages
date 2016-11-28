@@ -1,6 +1,6 @@
 .container
   .center-block
-    = simple_form_for @user_form, html: {class: 'form-inline'}, as: :user, url: users_path do |f|
+    = simple_form_for @user, html: {class: 'form-inline'} do |f|
       .form-inputs
         = f.input :name
         = f.input :dialect, as: :select, collection: [['Pirate', 'pirate'], ['Yoda', 'yoda'], ['Valley Girl', 'valley_girl']]

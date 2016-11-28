@@ -1,25 +1,31 @@
 class UsersController < ApplicationController
   def new
-    @user_form = UserForm.new
+    @user = User.new
   end
 
   def create
-    if @user_form = UserForm.new(params[:user])
-      if @user_form.valid?
-        set_user_in_session
-        ActionCable.server.broadcast 'users',
-                                     name: @user_form.name
-        redirect_to chat_path
-      else
-        render :new
-      end
+    @user = User.new(user_params)
+    if @user.save
+      @user.reset_persistence_token!
+      UserSession.create(@user, true)
+      ActionCable.server.broadcast 'users', name: @user.name
+      redirect_to chat_path
+    else
+      render :new
     end
   end
 
-private
-  def set_user_in_session
-    session['user'] = {}
-    session['user']['name'] = @user_form.name
-    session['user']['dialect'] = @user_form.dialect
+  def destroy
+    session = UserSession.find
+    user.destroy
+    session.destroy
+    ActionCable.server.broadcast 'users', name: user.name, deleted: 'true'
   end
+
+private
+
+  def user_params
+    params.require(:user).permit(:name, :dialect)
+  end
+
 end

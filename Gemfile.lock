@@ -39,6 +39,11 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+    authlogic (3.5.0)
+      activerecord (>= 3.2, < 5.1)
+      activesupport (>= 3.2, < 5.1)
+      request_store (~> 1.0)
+      scrypt (>= 1.2, < 4.0)
     autoprefixer-rails (6.3.6.2)
       execjs
     bootstrap-sass (3.3.6)
@@ -59,6 +64,9 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -108,6 +116,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.0.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.1)
+      actionpack (~> 5.x)
+      actionview (~> 5.x)
+      activesupport (~> 5.x)
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
@@ -123,6 +135,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    request_store (1.3.1)
     rspec-core (3.5.3)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -147,6 +160,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scrypt (3.0.3)
+      ffi-compiler (>= 1.0.0)
+      rake
     simple_form (3.3.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -185,6 +201,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic
   bootstrap-sass
   byebug
   coffee-rails (~> 4.2)
@@ -196,6 +213,7 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+  rails-controller-testing
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   simple_form

@@ -4,11 +4,13 @@
       Messages:
       #messages
     .col-md-4
-      Other users:
+      Users:
       #users
         %ul
+          - @users.each do |user|
+            %li= user.name
   .row
     = simple_form_for @message, remote: true do |f|
       .form-group
-        = f.input :content, as: :string, label: "#{session['user']['name']}: "
+        = f.input :content, as: :string, label: "#{current_user.name}: "
         = f.submit 'Send my message', class: 'btn primary-btn'

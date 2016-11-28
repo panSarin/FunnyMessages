@@ -34,6 +34,8 @@ gem 'simple_form'
 gem 'httparty'
 
 gem 'bootstrap-sass'
+gem 'authlogic'
+gem 'rails-controller-testing'
 
 
 group :development, :test do
