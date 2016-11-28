@@ -11,8 +11,8 @@ describe UsersController do
         expect{subject}.to change{User.count}.by(1)
       end
 
-      it 'call for SignInUser service' do
-        expect_any_instance_of(SignInUser).to receive(:process)
+      it 'broadcast information about new user' do
+        expect_any_instance_of(ActionCable::Server::Base).to receive(:broadcast).with('users', name: 'Joe')
         subject
       end
 

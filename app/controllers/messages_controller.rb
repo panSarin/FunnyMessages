@@ -5,11 +5,7 @@ class MessagesController < AuthenticationController
     message.dialect = current_user.dialect
     message.content_with_dialect = set_dialected_content(message)
     if message.save
-      ActionCable.server.broadcast 'messages',
-                                   message: message.content_with_dialect,
-                                   user: message.username,
-                                   created_at: l(message.created_at)
-
+      ActionCable.server.broadcast 'messages', message_html: MessagePresenter.new(message).in_chat
       head :ok
     end
   end
